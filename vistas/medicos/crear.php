@@ -6,7 +6,7 @@
     <title>Registros doc</title>
     <!-- Enlace a la hoja de estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="funciones.js?v=5"></script>
+    <script src="../../js/funciones.js?v=5"></script>
 </head>
 <body>
 
