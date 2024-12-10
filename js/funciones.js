@@ -1,36 +1,59 @@
-function registrarMedico() {
-    event.preventDefault();  // Previene que el formulario se envíe de manera tradicional
+document.addEventListener('DOMContentLoaded', function () {
+    const formulario = document.getElementById('FormularioRegistroMedico');
 
-    let datos = $('#formularioRegistro').serialize();  // Obtenemos los datos del formulario
+    // Capturar el evento submit del formulario
+    formulario.addEventListener('submit', function (e) {
+        e.preventDefault(); // Evitar el envío tradicional del formulario
 
-    $.ajax({
-        url: '/medicos/registro',  // Esta es la ruta que se encargará de llamar al controlador CRegistroMedico
-        type: 'POST',
-        data: datos,
-        success: function(response) {
-            if (response === "success") {
-                cargarTablaMedicos();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Médico registrado',
-                    text: 'El médico ha sido registrado correctamente.'
-                });
-            } else {
+        // Serializar los datos del formulario
+        let datos = $(this).serialize();
+
+        // Realizar la petición AJAX
+        $.ajax({
+            url: '/medicos/registro',  // Ruta al controlador
+            type: 'POST',
+            data: datos,
+            success: function (response) {
+                if (response === "success") {
+                    cargarTablaMedicos(); // Actualiza la tabla
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Médico registrado',
+                        text: 'El médico ha sido registrado correctamente.'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response
+                    });
+                }
+            },
+            error: function () {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: response  // Mostrar el mensaje de error devuelto desde el servidor
+                    text: 'No se pudo registrar al médico.'
                 });
             }
+        });
+    });
+});
+
+// Función para cargar la tabla de médicos
+function cargarTablaMedicos() {
+    $.ajax({
+        url: '/medicos/listar', // Ruta para obtener la lista de médicos
+        type: 'GET',
+        success: function (data) {
+            $('#contenidoTablaPersonas').html(data);
         },
-        error: function() {
+        error: function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo registrar al médico.'
+                text: 'No se pudo cargar la tabla de médicos.'
             });
         }
     });
-
-    
 }
