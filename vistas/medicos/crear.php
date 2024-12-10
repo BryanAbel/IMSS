@@ -10,39 +10,17 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
 
 
 
     <div class="container">
-    <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 9000%;">
+    <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 900%;">
          <h3>REGISTRO DE DOCTORES</h3>
             
-         <div class="card shadow p-4 mt-4 mx-auto" style="max-width: ;">
+         <div class="card shadow p-4 mt-4 mx-1" style="max-width: ;">
             <form id="formularioRegistro" method="post">
+              
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="iNombre" placeholder="Ingresa nombre">                    
@@ -72,7 +50,7 @@
                     <input type="text" class="form-control" id="Tel" name="iTel"  placeholder="Ingresa Telefono">
                 </div>           
             </form>
-            <button type="submit" class="btn btn-primary" onclick="registrar();">Registrar</button>
+            <button type="submit" class="btn btn-primary" onclick="registrarMedico();">Registrar</button>
             <hr>
             <div id="contenidoTablaPersonas"></div>
         </div>
