@@ -19,7 +19,7 @@
          <h3>REGISTRO DE DOCTORES</h3>
             
          <div class="card shadow p-4 mt-4 mx-1" style="max-width: ;">
-            <form id="formularioRegistro" method="post">
+            <form id="FormularioRegistroMedico" method="post">
               
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nombre</label>
