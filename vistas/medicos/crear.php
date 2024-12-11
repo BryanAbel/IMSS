@@ -6,9 +6,12 @@
     <title>Registros doc</title>
     <!-- Enlace a la hoja de estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<<<<<<< HEAD
      <!-- Enlace a sweed alert -->
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
 
+=======
+>>>>>>> 122c792ec9e0eb929b5dffe9ef5e0eb8541a8176
     <script src="../../js/funciones.js?v=5"></script>
 </head>
 <body>

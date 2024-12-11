@@ -57,7 +57,7 @@
 
                 <div class="mb-3">
                     <label for="Naci" class="form-label">Fecha de cita</label>
-                    <input type="date" class="form-control" id="cita" name="icita" placeholder="Ingresa Fecha de cita">
+                    <input type="date" class="form-control" id="cita" name="iCita" placeholder="Ingresa Fecha de cita">
                 </div>
                
                 </div>
