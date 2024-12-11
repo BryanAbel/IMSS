@@ -4,7 +4,7 @@ function registrarMedico() {
     let datos = $('#formularioRegistro').serialize();  // Obtenemos los datos del formulario
 
     $.ajax({
-        url: '/medicos/registro',  // Esta es la ruta que se encargará de llamar al controlador CRegistroMedico
+        url: '../modelos/medicos/registro',  // Esta es la ruta que se encargará de llamar al controlador CRegistroMedico
         type: 'POST',
         data: datos,
         success: function(response) {
