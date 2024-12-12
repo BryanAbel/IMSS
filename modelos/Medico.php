@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Coneccion.php';
+require_once __DIR__ . '/../Coneccion.php';
 
 class Medico
 {
@@ -19,7 +19,8 @@ class Medico
     public static function obtenerTodos()
     {
         $conexion = Coneccion::getConexion();
-
+    
+        // Consulta SQL para obtener todos los médicos
         $sql = "SELECT 
                     m.iId AS medicoId, 
                     n.vNombre, 
@@ -33,16 +34,23 @@ class Medico
                 FROM medicos m
                 INNER JOIN nom_doc n ON m.iIdNombre = n.iId
                 INNER JOIN especialidades e ON m.iIdEspecialidad = e.iId";
-
-        $result = $conexion->query($sql);
+    
+        $result = $conexion->query($sql); // Ejecutar la consulta
         $medicos = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $medicos[] = $row;
+    
+        // Verificar si la consulta devolvió resultados
+        if ($result->num_rows > 0) {
+            // Recorrer los resultados y almacenarlos en el array
+            while ($row = $result->fetch_assoc()) {
+                $medicos[] = $row;
+            }
+        } else {
+            echo "No se encontraron resultados en la consulta.";
         }
-
-        return $medicos;
-    }
+        
+            return $medicos; // Devolver el array con los médicos
+        }
+    
 
     public static function obtenerPorId($id)
     {

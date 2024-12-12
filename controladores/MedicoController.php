@@ -7,8 +7,11 @@ class MedicoController
     public function listar()
     {
         $medicos = Medico::obtenerTodos();
+
+        // Incluir solo la tabla desde listar.php
         include 'vistas/medicos/listar.php';
     }
+
 
     public function crear()
     {
@@ -16,10 +19,11 @@ class MedicoController
             $idNombre = $_POST['idNombre'];
             $idEspecialidad = $_POST['idEspecialidad'];
 
+            // Intentar crear el médico
             if (Medico::crear($idNombre, $idEspecialidad)) {
-                header('Location: /medicos/listar');
+                echo "success"; // Respuesta para solicitudes AJAX
             } else {
-                echo "Error al crear el médico.";
+                echo "Error al crear el médico."; // Respuesta de error
             }
         } else {
             include 'vistas/medicos/crear.php';
@@ -32,8 +36,9 @@ class MedicoController
             $idNombre = $_POST['idNombre'];
             $idEspecialidad = $_POST['idEspecialidad'];
 
+            // Intentar actualizar el médico
             if (Medico::actualizar($id, $idNombre, $idEspecialidad)) {
-                header('Location: /medicos/listar');
+                echo "success";
             } else {
                 echo "Error al actualizar el médico.";
             }
@@ -46,7 +51,7 @@ class MedicoController
     public function eliminar($id)
     {
         if (Medico::eliminar($id)) {
-            header('Location: /medicos/listar');
+            echo "success";
         } else {
             echo "Error al eliminar el médico.";
         }
