@@ -15,6 +15,25 @@
 <!-- Incluir Navbar -->
 <?php require_once 'navbar.php'; ?>
 
+<!-- incluir las secciones -->
+    <?php if (isset($_GET['section'])) {
+        switch ($_GET['section']) {
+            case 'pacientes':
+                require_once 'vistas/pacientes/crear.php';
+                break;
+            case 'medicos':
+                require_once 'vistas/medicos/crear.php';
+                break;
+            case 'especialidades':
+                require_once 'vistas/especialidades/crear.php';
+                break;
+            default:
+                require_once 'inicio.php';
+                break;
+        }
+    } else {
+        require_once 'inicio.php';
+    } ?>
 
     <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> 

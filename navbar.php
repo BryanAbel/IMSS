@@ -7,10 +7,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                <a class="nav-link" href="#">Pacietes</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="?section=pacientes">Pacietes</a>
+                <a class="nav-link" href="?section=medicos">Medicos</a>
+                <a class="nav-link" href="?section=especialidades">Especialidades</a>
             </div>
         </div>
     </div>
