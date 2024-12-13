@@ -53,7 +53,43 @@ function cargarTablaMedicos() {
     });
     
 }
-
+function cargarTablaEspecialidades(){  
+    let datos=0;
+    $.ajax({
+        url:'vistas/especialidades/listar.php',
+        type:'POST',
+        data: datos,
+        success: function(respuesta){            
+            document.getElementById("contenidoTablaEspecialidades").innerHTML = respuesta;
+        }
+    });
+}
+function registrarEspecialidad(){
+    datos = $('#FormularioRegistroEspecialidad').serialize();
+    alert(datos);
+    console.log(datos);
+    $.ajax({
+        url: 'controladores/EspecialidadConRegistrar.php',
+        type: 'POST',
+        data: datos,
+        success: function(data) {
+            alert(data);
+            cargarTablaEspecialidades();
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+                text: 'La especialidad ha sido registrado correctamente.'
+            });
+        },
+        error: function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo registrar la especialidad.'
+            });
+        }
+    })
+}
 
 
 

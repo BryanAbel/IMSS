@@ -13,8 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Luego se carga tu archivo de funciones.js -->
-    <script src="http://localhost/Imss/js/funciones.js?v=5"></script>
-
+    <script src="http://localhost/Imss/js/funciones.js?v=6"></script>
 
 </head>
 <body>
@@ -24,38 +23,29 @@
             <h3>REGISTRO DE ESPECIALIDAD</h3>
             
             <div class="card shadow p-4 mt-4 mx-1">
-    <form id="FormularioRegistroMedico" method="post">
-        <div class="row">
-            
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre de la especialidad</label>
-                    <input type="text" class="form-control" id="nombre" name="iNombre" placeholder="Ingresa nombre">
-                </div>
-                <div class="mb-3">
-                    <label for="SegundoNombre" class="form-label">descripcion</label>
-                    <input type="text" class="form-control" id="Descripcion" name="iDescripcion" placeholder="Ingresa una descripcion">
-                </div>
-                
-            
-            
-            <button type="button" class="btn btn-primary" onclick="registrarEspecialidad();">Registrar</button>
-        </div>
+    <form id="FormularioRegistroEspecialidad" method="post">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de la especialidad</label>
+                <input type="text" class="form-control" id="nombre" name="vNombre" placeholder="Ingresa nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="Descripcion" name="VDescripcion" placeholder="Ingresa una descripcion" required>
+            </div>
     </form>
+    <button type="submit" class="btn btn-primary" onclick="registrarEspecialidad();">Registrar</button>
     <hr>
-    <div id="contenidoTablaPersonas"></div>
 </div>
-
         </div>
     </div>
+    
     <!-- Mostrar especialidades -->
     <div class="container">
         <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 900%;">
-            <h3>ESPECIALIDADES REGISTRADAS</h3>
-            <div id="tablaEspecialidades">
+            <div id="contenidoTablaEspecialidades">
                 <!-- Aquí se cargarán las especialidades -->
+                
             </div>
-           
-
         </div>
     </div>
 

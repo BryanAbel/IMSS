@@ -1,5 +1,5 @@
 <?php
-require_once "../modelos/Especialidad.php";
+require_once __DIR__ . "/../modelos/Especialidad.php";
 
 // Obtener las especialidades
 $especialidades = getEspecialidades();

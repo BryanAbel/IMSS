@@ -1,41 +1,23 @@
 <?php
 
-class Coneccion
-{
-    private static $conexion;
+$host = 'localhost'; 
+$db   = 'imss'; 
+$user = 'root'; 
+$pass = ''; 
+$charset = 'utf8mb4';//ME PERMITE INGRESAR A LA DB CARACTERES ESPECIALES COMO
+//ACENTOS
 
-    // Método para obtener la conexión a la base de datos
-    public static function getConexion()
-    {
-        if (self::$conexion == null) {
-            // Definir parámetros de conexión a la base de datos
-            $servidor = "localhost";   // Dirección del servidor de base de datos
-            $usuario = "root";         // Usuario de la base de datos
-            $contrasena = "";          // Contraseña de la base de datos
-            $nombreBaseDeDatos = "imss"; // Nombre de la base de datos
+//BLOQUE TRY PARA PODER CAPTURAR EXCEPCIONES
+try{
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=$charset", $user, $pass);
+    //echo "Conexión exitosa a la base de datos.";
+    //ESTA LÍNEA ME PERMITE QUE LOS QUERYS ME MUESTREN LOS ERRORES
+    //POR EJEMPLO CUANDO INGRESO MAL EL NOMBRE DE UNA COLUMNA QUE NO EXISTE
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Crear la conexión
-            self::$conexion = new mysqli($servidor, $usuario, $contrasena, $nombreBaseDeDatos);
-
-            // Comprobar si la conexión fue exitosa
-            if (self::$conexion->connect_error) {
-                die("Conexión fallida: " . self::$conexion->connect_error);
-            }
-
-            // Configurar el juego de caracteres (UTF-8)
-            self::$conexion->set_charset("utf8");
-        }
-
-        return self::$conexion;
-    }
-
-    // Método para cerrar la conexión a la base de datos
-    public static function cerrarConexion()
-    {
-        if (self::$conexion != null) {
-            self::$conexion->close();
-            self::$conexion = null;
-        }
-    }
+}catch (PDOException $e) {
+    //SI HAY ERRORES EN LA CONEXIÓN AUTOMATICAMENTE SE CORTA EL FLUJO DEL PROGRAMA
+    die("Error de conexión: " . $e->getMessage());
 }
+
 ?>
