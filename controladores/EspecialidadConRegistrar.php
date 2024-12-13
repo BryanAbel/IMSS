@@ -1,7 +1,7 @@
 <?php
     $nombre = $_POST["vNombre"];
-    $Descrippcion = $_POST["VDescripcion"];
-     
+    $descripcion = $_POST["VDescripcion"];
+     echo "ya llegue";
     echo $nombre;
     require_once "../modelos/Especialidad.php";
 

@@ -69,7 +69,7 @@ function registrarEspecialidad(){
     alert(datos);
     console.log(datos);
     $.ajax({
-        url: 'controladores/EspecialidadConRegistrar.php',
+        url: '/Imss/controladores/EspecialidadConRegistrar.php',
         type: 'POST',
         data: datos,
         success: function(data) {

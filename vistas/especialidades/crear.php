@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Luego se carga tu archivo de funciones.js -->
-    <script src="http://localhost/Imss/js/funciones.js?v=6"></script>
+    <script src="http://localhost/Imss/js/funciones.js?v=9"></script>
 
 </head>
 <body>
