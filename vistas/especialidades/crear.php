@@ -6,10 +6,16 @@
     <title>Registros doc</title>
     <!-- Enlace a la hoja de estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Enlace a sweed alert -->
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <!-- Enlace a sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Primero se carga jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="../../js/funciones.js?v=5"></script>
+    <!-- Luego se carga tu archivo de funciones.js -->
+    <script src="http://localhost/Imss/js/funciones.js?v=5"></script>
+
+
 </head>
 <body>
 
@@ -20,17 +26,9 @@
             <div class="card shadow p-4 mt-4 mx-1">
     <form id="FormularioRegistroMedico" method="post">
         <div class="row">
-            <!-- Primera columna -->
-            <div class="mb-3">
-                <select name="" id="" class="form-control">
-                    <?php //HACER EL REQUIRE DEL MODLEO PARA OBTEBER LOS DATOS DE LOS PACIENTES Y LLENAR EL SELECT CON UN WHILE O FOREACH ?>
-                    <option value="1">Dr. Oliver Euriel</option>
-                    <option value="2">Dr. Roberto Lopez</option>
-                    <option value="3">Dr. Hugo Euriel</option>
-                </select>
-            </div>
+            
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
+                    <label for="nombre" class="form-label">Nombre de la especialidad</label>
                     <input type="text" class="form-control" id="nombre" name="iNombre" placeholder="Ingresa nombre">
                 </div>
                 <div class="mb-3">
@@ -49,6 +47,18 @@
 
         </div>
     </div>
+    <!-- Mostrar especialidades -->
+    <div class="container">
+        <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 900%;">
+            <h3>ESPECIALIDADES REGISTRADAS</h3>
+            <div id="tablaEspecialidades">
+                <!-- Aquí se cargarán las especialidades -->
+            </div>
+           
+
+        </div>
+    </div>
+
 
     <!-- Enlace a JS (jQuery) librería de JavaScript para poder utilizar AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
