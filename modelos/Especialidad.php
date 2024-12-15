@@ -1,6 +1,6 @@
 <?php
 function getEspecialidades() {
-    require_once __DIR__ . "/../Coneccion.php";
+    require __DIR__ . "/../Coneccion.php";
 
     $sql = "SELECT 
         espe.iId AS ID,
@@ -17,10 +17,11 @@ function getEspecialidades() {
     return $especialidades;
 }
 function registrarEspecialidad($nombre, $descripcion){
-    require_once __DIR__ . "/../Coneccion.php";
+    require __DIR__ . "/../Coneccion.php";
     try {
+        echo "Datos recibidos: Nombre - $nombre, Descripción - $descripcion<br>";
         $sql = "INSERT INTO especialidades(vNombre, vDescripcion)
-        VALUES (':nombre', ':descripcion')";    
+        VALUES (:nombre, :descripcion)";    
 
         $stmt = $pdo->prepare($sql);
 
@@ -38,7 +39,7 @@ function registrarEspecialidad($nombre, $descripcion){
     }
 }
 function EspecialidadExiste($nombre) {
-    require_once __DIR__ . "/../Coneccion.php";
+    require __DIR__ . "/../Coneccion.php";
 
     $query = "SELECT COUNT(*) FROM especialidades WHERE vNombre = :Nombre";
     $stmt = $pdo->prepare($query);
