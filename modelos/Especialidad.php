@@ -20,7 +20,7 @@ function registrarEspecialidad($nombre, $descripcion){
     require_once __DIR__ . "/../Coneccion.php";
     try {
         $sql = "INSERT INTO especialidades(vNombre, vDescripcion)
-        VALUES (':nombre', ':descripcion')";
+        VALUES (':nombre', ':descripcion')";    
 
         $stmt = $pdo->prepare($sql);
 
