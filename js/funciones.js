@@ -56,7 +56,7 @@ function cargarTablaMedicos() {
 function cargarTablaEspecialidades(){  
     let datos=0;
     $.ajax({
-        url:'vistas/especialidades/listar.php',
+        url:'/Imss/vistas/especialidades/listar.php',
         type:'POST',
         data: datos,
         success: function(respuesta){            
