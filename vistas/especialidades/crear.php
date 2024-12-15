@@ -49,7 +49,12 @@
         </div>
     </div>
 
-
+    <script>
+        // Llamar a la función de cargar la tabla cuando se carga la página
+        $(document).ready(function () {
+            cargarTablaEspecialidades();
+        });
+    </script>
     <!-- Enlace a JS (jQuery) librería de JavaScript para poder utilizar AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Scripts de Bootstrap -->
