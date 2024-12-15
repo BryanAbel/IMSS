@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . "/../../controladores/EspecialidadController.php";
+require __DIR__ . "/../../controladores/EspecialidadController.php";
 ?>
 <h1>ESPECIALIDADES REGISTRADAS</h1>
 <table class="table">
