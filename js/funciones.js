@@ -117,6 +117,20 @@ function ModiEspecialidad(){
         }
     });
 }
+function EliminarEspecialidad(idRegistro){
+    $.ajax({
+        url: '/Imss/controladores/EspecialidadControlerEliminar.php',
+        type: 'POST',
+        data: {
+            "idEspecialidad" : idRegistro
+        },
+        success: function(data){
+            cargarTablaEspecialidades();
+            alert("Datos Eliminados");
+        }
+    });
+    
+}
   
 
 
