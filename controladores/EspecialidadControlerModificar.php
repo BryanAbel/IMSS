@@ -24,3 +24,4 @@
         echo "Error al actualizar la especialidad";
     }
 ?>
+                                                            

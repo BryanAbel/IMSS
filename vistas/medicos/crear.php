@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Enlace a jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <!-- Luego se carga tu archivo de funciones.js -->
+     <script src="http://localhost/Imss/js/funciones.js?v=14"></script>
 </head>
 <body>
     <div class="container">
@@ -50,12 +52,18 @@
                             <label for="Tel" class="form-label">Teléfono</label>
                             <input type="tel" class="form-control" id="Tel" name="iTel" placeholder="Ingresa Teléfono" required>
                         </div>
-                        <div class="text-end">
-                            <button type="button" class="btn btn-primary" onclick="registrarMedico();">Registrar</button>
-                        </div>
+                        <div class="mb-3">
+    <label for="Especialidad" class="form-label">Especialidad</label>
+    <select class="form-select" id="Especialidad" name="iEspecialidad" required>
+        <option value="">Seleccione una especialidad</option>
+    </select>
+</div>
                     </div>
                 </div>
             </form>
+            <div class="text-end">
+                <button type="button" class="btn btn-primary" onclick="registrarMedico();">Registrar</button>
+            </div>
         </div>
 
         <div class="container">
@@ -70,21 +78,11 @@
             <div id="contenidoTablaPersonas" class="mt-4"></div>
         </div>
 
-        <script src="js/funciones.js"></script>
-        <script>
-            // Al cargar la página, mostrar la tabla
-            document.addEventListener('DOMContentLoaded', function () {
-                cargarTablaMedicos(); // Función definida en funciones.js
-            });
+
         </script>
+     <!-- Enlace a JS (jQuery) librería de JavaScript para poder utilizar AJAX -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // Al cargar la página, mostrar la tabla
-        document.addEventListener('DOMContentLoaded', function () {
-            cargarTablaMedicos(); // Función definida en funciones.js
-        });
-    </script>
 </body>
 </html>

@@ -130,7 +130,24 @@ function EliminarEspecialidad(idRegistro){
         }
     });
     
+}function cargarEspecialidadesCombo() {
+    $.ajax({
+        url: '/Imss/vistas/medicos/crear.php', // Ruta correcta al archivo PHP en la carpeta de médicos
+        type: 'GET',
+        success: function (respuesta) {
+            // Insertar las opciones en el combo box
+            $('#comboEspecialidades').html(respuesta); 
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudieron cargar las especialidades.'
+            });
+        }
+    });
 }
+
   
 
 
