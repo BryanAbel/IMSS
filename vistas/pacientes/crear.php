@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Enlace a SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
-    <script src="../../js/funciones.js?v=5"></script>
+    <script src="http://localhost/Imss/js/funciones.js?v=14"></script>
 </head>
 <body>
     
@@ -72,7 +72,13 @@
             </div>
         </div>
     </div>
-
+    <script>
+        // Llamar a la función de cargar la tabla cuando se carga la página
+        $(document).ready(function () {
+            //aqui se cambia cargarTablaEspecialidades() por cargar tabla personas
+            cargarTablaEspecialidades();
+        });
+    </script>
               
 
     <!-- Enlace a JS (jQuery) librería de JavaScript para poder utilizar AJAX -->
