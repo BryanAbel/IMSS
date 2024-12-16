@@ -1,59 +1,59 @@
-require_once 'Coneccion.php';
+<?php
+function getPacientes() {
+    require __DIR__ . "/../Coneccion.php";
 
-class Paciente {
-    private $conexion;
-
-    public function __construct() {
-        $db = new Coneccion();
-        $this->conexion = $db->conectar();
+    $sql = "SELECT 
+        paci.iId AS ID,
+        paci.vNombre AS NOMBRE,
+        paci.vSegundoNombre AS SEGUNDONOMBRE,
+        paci.vApellidoP AS APELLIDOP,
+        paci.vApellidoM AS APELLIDOSM,
+        paci.dFechaNacimiento AS FECHANACI,
+        paci.vTelParticular AS TELPARTI,
+        paci.vTelFamiliar AS TELFAMI
+    FROM nom_pa AS paci";
+    $resultado = $pdo->query($sql);
+    if ($resultado === false){
+        die("Errir en la cosulta: " . implode(";", $pdo->errirInfo()));
     }
+     // Obtener todos los resultados como un arreglo asociativo
+    $Pacientes = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $Pacientes;
+}
+function RegistrarPacientes($Nombre,$Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar){
+    require __DIR__ . "/../Coneccion.php";
+    try {
+        $sql = "INSERT INTO nom_pa(vNombre, vSegundoNombre, vApellidoP, vApellidoM, dFechaNacimiento, vTelParticular, vTelFamiliar)
+        VALUES (:nombre, :segundonombre,:apellidop, :apellidom, :fechanaci, :telparti, :telfami)";    
 
-    // Crear un nuevo paciente
-    public function agregarPaciente($idNombre, $fechaRegistro, $idTratamiento) {
-        $query = "INSERT INTO pacientes (Id_nombre, Fecha_de_registro, Id_tratamiento) 
-                  VALUES (:idNombre, :fechaRegistro, :idTratamiento)";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(':idNombre', $idNombre);
-        $stmt->bindParam(':fechaRegistro', $fechaRegistro);
-        $stmt->bindParam(':idTratamiento', $idTratamiento);
+        $stmt = $pdo->prepare($sql);
 
-        return $stmt->execute();
+        $stmt->bindParam(':nombre', $Nombre);
+        $stmt->bindParam(':segundonombre',$Segundonombre);
+        $stmt->bindParam(':apellidop',$apellidoP);
+        $stmt->bindParam(':apellidom',$apellidoM);
+        $stmt->bindParam(':fechanaci',$Fechanaci);
+        $stmt->bindParam(':telparti',$telparticular);
+        $stmt->bindParam(':telfami',$telfamiliar);
+        
+
+        if ($stmt->execute()) {
+            echo "Registro exitoso";            
+        } else {
+            echo "Error en la ejecución de la consulta";
+        }
+    } catch (PDOException $e) {
+        // Captura de errores en caso de excepción
+        echo "Error: " . $e->getMessage();
     }
+}
+function EspecialidadExiste($nombre) {
+    require __DIR__ . "/../Coneccion.php";
 
-    // Leer todos los pacientes
-    public function listarPacientes() {
-        $query = "SELECT 
-                    p.id, 
-                    n.Nombre, n.Nombre_2, n.Ap, n.Am, 
-                    p.Fecha_de_registro, 
-                    t.Nombre AS Tratamiento 
-                  FROM pacientes p
-                  INNER JOIN nom_pa n ON p.Id_nombre = n.Id
-                  INNER JOIN tratamientos t ON p.Id_tratamiento = t.Id";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    // Actualizar un paciente
-    public function actualizarPaciente($id, $idNombre, $fechaRegistro, $idTratamiento) {
-        $query = "UPDATE pacientes 
-                  SET Id_nombre = :idNombre, Fecha_de_registro = :fechaRegistro, Id_tratamiento = :idTratamiento 
-                  WHERE id = :id";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':idNombre', $idNombre);
-        $stmt->bindParam(':fechaRegistro', $fechaRegistro);
-        $stmt->bindParam(':idTratamiento', $idTratamiento);
-
-        return $stmt->execute();
-    }
-
-    // Eliminar un paciente
-    public function eliminarPaciente($id) {
-        $query = "DELETE FROM pacientes WHERE id = :id";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
-    }
+    $query = "SELECT COUNT(*) FROM especialidades WHERE vNombre = :Nombre";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':Nombre', $nombre);
+    $stmt->execute();
+    return $stmt->fetchColumn() > 0; // Devuelve true si el correo ya existe
 }

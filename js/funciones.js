@@ -92,4 +92,43 @@ function registrarEspecialidad(){
 }
 
 
+//registrar pacientes
+function registrarPaciente(){
+    datos = $('#FormularioRegistroPaciente').serialize();
+    alert(datos);
+    console.log(datos);
+    $.ajax({
+        url: '/Imss/controladores/pacientecontrolerRegistro.php',
+        type: 'POST',
+        data: datos,
+        success: function(data) {
+            alert(data);
+            cargarTablapaciente();
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+                text: 'La especialidad ha sido registrado correctamente.'
+            });
+        },
+        error: function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo registrar la especialidad.'
+            });
+        }
+    })
+}
 
+//cargar tabla
+function cargarTablapaciente(){  
+    let datos=0;
+    $.ajax({
+        url:'/Imss/vistas/pacientes/listar.php',
+        type:'POST',
+        data: datos,
+        success: function(respuesta){            
+            document.getElementById("contenidoTablaPacientes").innerHTML = respuesta;
+        }
+    });
+}
