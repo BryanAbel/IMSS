@@ -1,107 +1,125 @@
 <?php
+function getMedicos() {
+    require __DIR__ . "/../Coneccion.php";
 
-require_once __DIR__ . '/../Coneccion.php';
-
-class Medico
-{
-    public static function crear($idNombre, $idEspecialidad)
-    {
-        $conexion = Coneccion::getConexion();
-
-        $sql = "INSERT INTO medicos (iIdNombre, iIdEspecialidad) VALUES (?, ?)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("ii", $idNombre, $idEspecialidad);
-        $stmt->execute();
-
-        return $stmt->affected_rows > 0;
+    $sql = "SELECT 
+                iId AS ID,
+                vNombre, vSegundoNombre, vApellidoP, vApellidoM, 
+                dFechaNacimiento, iAñosServicio, vTelParticular
+            FROM nom_doc";
+    $resultado = $pdo->query($sql);
+    if ($resultado === false) {
+        die("Error en la consulta: " . implode(";", $pdo->errorInfo()));
     }
+    
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+}
 
-    public static function obtenerTodos()
-    {
-        $conexion = Coneccion::getConexion();
-    
-        // Consulta SQL para obtener todos los médicos
-        $sql = "SELECT 
-                    m.iId AS medicoId, 
-                    n.vNombre, 
-                    n.vSegundoNombre, 
-                    n.vApellidoP, 
-                    n.vApellidoM, 
-                    n.dFechaNacimiento, 
-                    n.iAñosServicio, 
-                    n.vTelParticular, 
-                    e.vNombre AS especialidad
-                FROM medicos m
-                INNER JOIN nom_doc n ON m.iIdNombre = n.iId
-                INNER JOIN especialidades e ON m.iIdEspecialidad = e.iId";
-    
-        $result = $conexion->query($sql); // Ejecutar la consulta
-        $medicos = [];
-    
-        // Verificar si la consulta devolvió resultados
-        if ($result->num_rows > 0) {
-            // Recorrer los resultados y almacenarlos en el array
-            while ($row = $result->fetch_assoc()) {
-                $medicos[] = $row;
-            }
+
+function registrarMedico($nombre, $segundoNombre, $apellidoP, $apellidoM, $fechaNacimiento, $añosServicio, $telParticular) {
+    require __DIR__ . "/../Coneccion.php"; // Incluir la conexión a la base de datos
+
+    try {
+        // Mostrar los datos recibidos para depuración (opcional)
+        echo "Datos recibidos: Nombre - $nombre, Segundo Nombre - $segundoNombre, Apellido P - $apellidoP, Apellido M - $apellidoM, Fecha Nacimiento - $fechaNacimiento, Años de Servicio - $añosServicio, Tel Particular - $telParticular<br>";
+
+        // Consulta SQL para insertar un nuevo médico
+        $sql = "INSERT INTO nom_doc(vNombre, vSegundoNombre, vApellidoP, vApellidoM, dFechaNacimiento, iAñosServicio, vTelParticular)
+                VALUES (:nombre, :segundoNombre, :apellidoP, :apellidoM, :fechaNacimiento, :añosServicio, :telParticular)";    
+
+        // Preparar la consulta
+        $stmt = $pdo->prepare($sql);
+
+        // Enlazar los parámetros con la consulta SQL
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':segundoNombre', $segundoNombre);
+        $stmt->bindParam(':apellidoP', $apellidoP);
+        $stmt->bindParam(':apellidoM', $apellidoM);
+        $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
+        $stmt->bindParam(':añosServicio', $añosServicio);
+        $stmt->bindParam(':telParticular', $telParticular);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            echo "Médico registrado correctamente";            
         } else {
-            echo "No se encontraron resultados en la consulta.";
+            echo "Error al ejecutar la consulta";
         }
-        
-            return $medicos; // Devolver el array con los médicos
-        }
-    
-
-    public static function obtenerPorId($id)
-    {
-        $conexion = Coneccion::getConexion();
-
-        $sql = "SELECT 
-                    m.iId AS medicoId, 
-                    n.vNombre, 
-                    n.vSegundoNombre, 
-                    n.vApellidoP, 
-                    n.vApellidoM, 
-                    n.dFechaNacimiento, 
-                    n.iAñosServicio, 
-                    n.vTelParticular, 
-                    e.vNombre AS especialidad
-                FROM medicos m
-                INNER JOIN nom_doc n ON m.iIdNombre = n.iId
-                INNER JOIN especialidades e ON m.iIdEspecialidad = e.iId
-                WHERE m.iId = ?";
-
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_assoc();
-    }
-
-    public static function actualizar($id, $idNombre, $idEspecialidad)
-    {
-        $conexion = Coneccion::getConexion();
-
-        $sql = "UPDATE medicos SET iIdNombre = ?, iIdEspecialidad = ? WHERE iId = ?";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("iii", $idNombre, $idEspecialidad, $id);
-        $stmt->execute();
-
-        return $stmt->affected_rows > 0;
-    }
-
-    public static function eliminar($id)
-    {
-        $conexion = Coneccion::getConexion();
-
-        $sql = "DELETE FROM medicos WHERE iId = ?";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-
-        return $stmt->affected_rows > 0;
+    } catch (PDOException $e) {
+        // Captura de errores en caso de excepción
+        echo "Error: " . $e->getMessage();
     }
 }
 
-?>
+
+
+
+
+function getMedicoPorId($id) {
+    require __DIR__ . "/../Coneccion.php";
+
+    $sql = "SELECT iId as ID,
+                vNombre AS Nombre,
+                vSegundoNombre AS SegundoNombre,
+                vApellidoP AS ApellidoP,
+                vApellidoM AS ApellidoM,
+                dFechaNacimiento AS FechaNacimiento,
+                iAñosServicio AS AnosServicio,
+                vTelParticular AS TelParticular
+            FROM nom_doc
+            WHERE iId = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+function actualizarMedico($id, $nombre, $segundoNombre, $apellidoP, $apellidoM, $fechaNacimiento, $añosServicio, $telParticular) {
+    require __DIR__ . "/../Coneccion.php";
+
+    try {
+        $sql = "UPDATE nom_doc 
+                SET vNombre = :nombre, vSegundoNombre = :segundoNombre, vApellidoP = :apellidoP, vApellidoM = :apellidoM, 
+                    dFechaNacimiento = :fechaNacimiento, iAñosServicio = :añosServicio, vTelParticular = :telParticular
+                WHERE iId = :id";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':segundoNombre', $segundoNombre);
+        $stmt->bindParam(':apellidoP', $apellidoP);
+        $stmt->bindParam(':apellidoM', $apellidoM);
+        $stmt->bindParam(':fechaNacimiento', $fechaNacimiento);
+        $stmt->bindParam(':añosServicio', $añosServicio);
+        $stmt->bindParam(':telParticular', $telParticular);
+
+        if ($stmt->execute()) {
+            echo "Actualización exitosa";
+        } else {
+            echo "Error en la ejecución de la consulta";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
+function eliminarMedico($id) {
+    require __DIR__ . "/../Coneccion.php";
+
+    try {
+        $sql = "DELETE FROM nom_doc WHERE iId = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        
+        if ($stmt->execute()) {
+            echo "Eliminación exitosa";
+        } else {
+            echo "Error en la eliminación";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
