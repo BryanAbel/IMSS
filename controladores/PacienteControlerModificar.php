@@ -20,7 +20,7 @@
     require __DIR__ . "/../modelos/Paciente.php";
 
     // Actualizar la especialidad
-    $resultado = actualizarEspecialidad($id, $nombre, $Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar);
+    $resultado = actualizarP($id, $nombre, $Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar);
 
     // Confirmar éxito o error
     if ($resultado) {

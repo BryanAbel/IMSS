@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost'; 
-$db   = 'imss'; 
+$db   = 'ims2'; 
 $user = 'root'; 
 $pass = ''; 
 $charset = 'utf8mb4';//ME PERMITE INGRESAR A LA DB CARACTERES ESPECIALES COMO

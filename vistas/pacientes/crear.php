@@ -72,11 +72,13 @@
             </div>
         </div>
     </div>
+    <?php
+    require_once "editar.php";
+    ?>
     <script>
         // Llamar a la función de cargar la tabla cuando se carga la página
         $(document).ready(function () {
-            //aqui se cambia cargarTablaEspecialidades() por cargar tabla personas
-            cargarTablaEspecialidades();
+            cargarTablapaciente();
         });
     </script>
               

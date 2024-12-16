@@ -79,7 +79,7 @@ function getPacientePorId($id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);  // Devuelve los datos de la especialidad
 }
 
-function actualizarPacientes($id,$Nombre,$Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar) {
+function actualizarP($id,$Nombre,$Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar) {
     require __DIR__ . "/../Coneccion.php";
     echo "llegue";
     try {

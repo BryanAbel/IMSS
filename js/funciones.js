@@ -229,7 +229,7 @@ function EliminarP(idRegistro){
         url: '/Imss/controladores/PacienteControlerEliminar.php',
         type: 'POST',
         data: {
-            "idpaciente" : idRegistro
+            "idpaciente": idRegistro
         },
         success: function(data){
             cargarTablaPaciente();
