@@ -165,7 +165,7 @@ function registrarPaciente(){
     })
 }
 
-//cargar tabla
+//cargar tabla pacientes
 function cargarTablapaciente(){  
     let datos=0;
     $.ajax({
@@ -176,4 +176,48 @@ function cargarTablapaciente(){
             document.getElementById("contenidoTablaPacientes").innerHTML = respuesta;
         }
     });
+}
+
+//modificar pacientes
+function modificarP(idPacientes){
+    $("#btnModal").click();
+    $.ajax({
+        url:'controladores/PacientesControlerGet.php',
+        type:'POST',
+        data: {
+                "idPacientes" : idPacientes
+            },
+        success: function(respuesta){            
+            document.getElementById("resultadoModificacion").innerHTML = respuesta;
+        }
+    });
+}
+function ModiPacientes(){
+    datos = $('#formularioModificacionPacientes').serialize();
+    $.ajax({
+        url: '/Imss/controladores/PacienteControlerModificar.php',
+        type: 'POST',
+        data: datos,
+
+        success: function(data){            
+            console.log(datos);
+            cargarTablaPaciente();
+            alert("Modificacion editosa");
+        }
+    });
+}
+//eliminar paciente
+function EliminarP(idRegistro){
+    $.ajax({
+        url: '/Imss/controladores/PacienteControlerEliminar.php',
+        type: 'POST',
+        data: {
+            "idpaciente" : idRegistro
+        },
+        success: function(data){
+            cargarTablaPaciente();
+            alert("Datos Eliminados");
+        }
+    });
+    
 }

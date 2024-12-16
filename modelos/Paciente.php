@@ -57,3 +57,59 @@ function EspecialidadExiste($nombre) {
     $stmt->execute();
     return $stmt->fetchColumn() > 0; // Devuelve true si el correo ya existe
 }
+
+function getPacientePorId($id) {
+    require __DIR__ . "/../Coneccion.php";
+    $sql = "SELECT 
+                paci.iId AS ID,
+        paci.vNombre AS NOMBRE,
+        paci.vSegundoNombre AS SEGUNDONOMBRE,
+        paci.vApellidoP AS APELLIDOP,
+        paci.vApellidoM AS APELLIDOSM,
+        paci.dFechaNacimiento AS FECHANACI,
+        paci.vTelParticular AS TELPARTI,
+        paci.vTelFamiliar AS TELFAMI
+            FROM nom_pa AS paci
+            WHERE paci.iId = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    
+    return $stmt->fetch(PDO::FETCH_ASSOC);  // Devuelve los datos de la especialidad
+}
+
+function actualizarPacientes($id,$Nombre,$Segundonombre, $apellidoP, $apellidoM, $Fechanaci, $telparticular, $telfamiliar) {
+    require __DIR__ . "/../Coneccion.php";
+    echo "llegue";
+    try {
+        $sql = "UPDATE nom_pa
+                SET vNombre = :nombre, 
+                vSegundoNombre = :segundonombre,
+                vApellidoP = :apellidop,
+                vApellidoM = :apellidom,
+                dFechaNacimiento = :fechanaci,
+                vTelParticular = :telparti,
+                vTelFamiliar = :telfami
+                WHERE iId = :id";
+        
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':nombre2', $Segundonombre);
+        $stmt->bindParam(':apellidop', $apellidoP);
+        $stmt->bindParam(':apellidom', $apellidoM);
+        $stmt->bindParam(':FechaN', $Fechanaci);
+        $stmt->bindParam(':TelP', $telparticular);
+        $stmt->bindParam(':TelF', $telfamiliar);
+        
+        if ($stmt->execute()) {
+            echo "Actualización exitosa";            
+        } else {
+            echo "Error en la ejecución de la consulta";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}

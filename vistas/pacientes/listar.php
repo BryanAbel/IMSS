@@ -32,8 +32,8 @@ require __DIR__ . "/../../controladores/PacienteController.php";
                     
                     ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm" onclick="modificar(<?php echo $pacientes['ID']; ?>);">Editar</a>
-                        <a href="#" class="btn btn-danger btn-sm" onclick="eliminar(<?php echo $pacientes['ID']; ?>);">Eliminar</a>
+                        <a href="#" class="btn btn-warning btn-sm" onclick="modificarP(<?php echo $pacientes['ID']; ?>);">Editar</a>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="eliminarP(<?php echo $pacientes['ID']; ?>);">Eliminar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

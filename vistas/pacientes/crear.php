@@ -11,7 +11,7 @@
     <script src="../../js/funciones.js?v=5"></script>
 </head>
 <body>
-
+    
     <div class="container">
         <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 900%;">
             <h3>REGISTRO DEL PACIENTE</h3>
