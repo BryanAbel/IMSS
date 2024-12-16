@@ -47,3 +47,41 @@ function EspecialidadExiste($nombre) {
     $stmt->execute();
     return $stmt->fetchColumn() > 0; // Devuelve true si el correo ya existe
 }
+function getEspecialidadPorId($id) {
+    require __DIR__ . "/../Coneccion.php";
+    $sql = "SELECT 
+                espe.iId AS ID,
+                espe.vNombre AS Nombre,
+                espe.vDescripcion AS Descripcion
+            FROM especialidades AS espe
+            WHERE espe.iId = :id";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    
+    return $stmt->fetch(PDO::FETCH_ASSOC);  // Devuelve los datos de la especialidad
+}
+function actualizarEspecialidad($id, $nombre, $descripcion) {
+    require __DIR__ . "/../Coneccion.php";
+    echo "llegue";
+    try {
+        $sql = "UPDATE especialidades
+                SET vNombre = :nombre, vDescripcion = :descripcion
+                WHERE iId = :id";
+        
+        $stmt = $pdo->prepare($sql);
+        
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':descripcion', $descripcion);
+        
+        if ($stmt->execute()) {
+            echo "Actualización exitosa";            
+        } else {
+            echo "Error en la ejecución de la consulta";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}

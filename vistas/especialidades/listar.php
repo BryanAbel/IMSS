@@ -19,7 +19,7 @@ require __DIR__ . "/../../controladores/EspecialidadController.php";
                     <td><?php echo $especialidad['Nombre']; ?></td>
                     <td><?php echo $especialidad['Descripcion']; ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning btn-sm" onclick="modificar(<?php echo $especialidad['ID']; ?>);">Editar</a>
+                        <a href="#" class="btn btn-warning btn-sm" onclick="ModificarEspecialidad(<?php echo $especialidad['ID']; ?>);">Editar</a>
                         <a href="#" class="btn btn-danger btn-sm" onclick="eliminar(<?php echo $especialidad['ID']; ?>);">Eliminar</a>
                     </td>
                 </tr>
