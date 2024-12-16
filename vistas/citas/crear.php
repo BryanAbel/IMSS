@@ -54,6 +54,16 @@
                     <option value="3">Dr. Hugo Euriel</option>
                 </select>
             </div>
+            
+            <div class="mb-3">
+            <label for="">nombre de la especialidad</label>
+                <select name="" id="" class="form-control">
+                    <?php //HACER EL REQUIRE DEL MODLEO PARA OBTEBER LOS DATOS DE LOS PACIENTES Y LLENAR EL SELECT CON UN WHILE O FOREACH ?>
+                    <option value="1">cardiologia</option>
+                    <option value="2">neurologia</option>
+                    <option value="3">obstreticia</option>
+                </select>
+            </div>
 
                 <div class="mb-3">
                     <label for="Naci" class="form-label">Fecha de cita</label>

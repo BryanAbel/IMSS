@@ -1,58 +1,68 @@
-
-function registrarMedico() {
-    const datos = $("#FormularioRegistroMedico").serialize(); // Serializa los datos del formulario
-
+function registrarDoctores(){
+    datos = $('#FormularioRegistroMedico').serialize();
+    alert(datos);
+    console.log(datos);
     $.ajax({
-        url: '/medicos/crear', // Ruta donde se procesará la creación
+        url: '/Imss/controladores/MedicoConRegistrar.php',
         type: 'POST',
         data: datos,
-        success: function (response) {
-            if (response === "success") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Médico registrado',
-                    text: 'El médico ha sido registrado correctamente.',
-                });
-                cargarTablaMedicos(); // Actualiza la tabla
-                $("#FormularioRegistroMedico")[0].reset(); // Limpia el formulario
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: response
-                });
-            }
+        success: function(data) {
+            alert(data);
+            cargarTablaMedicos();
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+                text: 'El medico ha sido registrado correctamente.'
+            });
         },
-        error: function () {
+        error: function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo registrar al médico.'
+                text: 'No se pudo registrar la Medico.'
             });
+        }
+    })
+}
+function cargarTablaMedicos(){  
+    let datos=0;
+    $.ajax({
+        url:'/Imss/vistas/medicos/listar.php',
+        type:'POST',
+        data: datos,
+        success: function(respuesta){            
+            document.getElementById("contenidoTablaPersonas").innerHTML = respuesta;
+        }
+    });
+}
+function ModificarMedicos(idMedico){
+    $("#btnModal").click();
+    $.ajax({
+        url:'controladores/MedicoControlerGet.php',
+        type:'POST',
+        data: {
+                "idMedico" : idMedico
+            },
+        success: function(respuesta){            
+            document.getElementById("resultadoModificacion").innerHTML = respuesta;
+        }
+    });
+}
+function ModiMEdicos(){
+    datos = $('#formularioModificacionEspecialidad').serialize();
+    $.ajax({
+        url: '/Imss/controladores/MedicoControlerModificar.php',
+        type: 'POST',
+        data: datos,
+
+        success: function(data){            
+            console.log(datos);
+            cargarTablaMedicos();
+            alert("Modificacion editosa");
         }
     });
 }
 
-/**
- * Función para cargar la tabla de médicos desde listar.php.
- */
-function cargarTablaMedicos() {
-    $.ajax({
-        url: 'vistas/medicos/listar.php', // Ruta que devuelve la tabla (AJAX)
-        type: 'GET',
-        success: function (data) {
-            $('#contenidoTablaPersonas').html(data); // Carga el contenido en el div
-        },
-        error: function () {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No se pudo cargar la tabla de médicos.'
-            });
-        }
-    });
-    
-}
 function cargarTablaEspecialidades(){  
     let datos=0;
     $.ajax({

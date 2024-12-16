@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<?php
+require __DIR__ . "/../../Coneccion.php";
+try {
+    $sql = "SELECT 
+        espe.iId AS ID,
+        espe.vNombre AS Nombre,
+        espe.vDescripcion AS Descripcion
+    FROM especialidades AS espe"; // Reemplaza por tu consulta real
+    $resultado = $pdo->query($sql); // $conexion es el nombre en Coneccion.php
+} catch (Exception $e) {
+    die("Error en la consulta: " . $e->getMessage());
+}
+?>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +28,7 @@
      <!-- Luego se carga tu archivo de funciones.js -->
      <script src="http://localhost/Imss/js/funciones.js?v=14"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="card shadow p-4 mt-4 mx-auto" style="max-width: 900px;">
@@ -27,7 +43,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="SegundoNombre" class="form-label">Segundo nombre</label>
-                            <input type="text" class="form-control" id="SegundoNombre" name="iSegundoApellido" placeholder="Ingresa Segundo Nombre">
+                            <input type="text" class="form-control" id="SegundoNombre" name="iSegundoNombre" placeholder="Ingresa Segundo Nombre">
                         </div>
                         <div class="mb-3">
                             <label for="Ap" class="form-label">Apellido Paterno</label>
@@ -52,17 +68,12 @@
                             <label for="Tel" class="form-label">Teléfono</label>
                             <input type="tel" class="form-control" id="Tel" name="iTel" placeholder="Ingresa Teléfono" required>
                         </div>
-                        <div class="mb-3">
-    <label for="Especialidad" class="form-label">Especialidad</label>
-    <select class="form-select" id="Especialidad" name="iEspecialidad" required>
-        <option value="">Seleccione una especialidad</option>
-    </select>
-</div>
+                        
                     </div>
                 </div>
             </form>
             <div class="text-end">
-                <button type="button" class="btn btn-primary" onclick="registrarMedico();">Registrar</button>
+                <button type="button" class="btn btn-primary" onclick="registrarDoctores();">Registrar</button>
             </div>
         </div>
 
@@ -79,9 +90,17 @@
         </div>
 
 
-        </script>
-     <!-- Enlace a JS (jQuery) librería de JavaScript para poder utilizar AJAX -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <?php
+    require_once "editar.php";
+    ?>
+
+    <script>
+        // Llamar a la función de cargar la tabla cuando se carga la página
+        $(document).ready(function () {
+            cargarTablaMedicos();
+        });
+    </script>
+
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
