@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Luego se carga tu archivo de funciones.js -->
-    <script src="http://localhost/Imss/js/funciones.js?v=9"></script>
+    <script src="http://localhost/Imss/js/funciones.js?v=14"></script>
 
 </head>
 <body>
@@ -48,6 +48,9 @@
             </div>
         </div>
     </div>
+    <?php
+    require_once "editar.php";
+    ?>
 
     <script>
         // Llamar a la función de cargar la tabla cuando se carga la página

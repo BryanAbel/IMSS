@@ -90,6 +90,51 @@ function registrarEspecialidad(){
         }
     })
 }
+function ModificarEspecialidad(idEspecialidad){
+    $("#btnModal").click();
+    $.ajax({
+        url:'controladores/EspecialidadControlerGet.php',
+        type:'POST',
+        data: {
+                "idEspecialidad" : idEspecialidad
+            },
+        success: function(respuesta){            
+            document.getElementById("resultadoModificacion").innerHTML = respuesta;
+        }
+    });
+}
+function ModiEspecialidad(){
+    datos = $('#formularioModificacionEspecialidad').serialize();
+    $.ajax({
+        url: '/Imss/controladores/EspecialidadControlerModificar.php',
+        type: 'POST',
+        data: datos,
+
+        success: function(data){            
+            console.log(datos);
+            cargarTablaEspecialidades();
+            alert("Modificacion editosa");
+        }
+    });
+}
+function EliminarEspecialidad(idRegistro){
+    $.ajax({
+        url: '/Imss/controladores/EspecialidadControlerEliminar.php',
+        type: 'POST',
+        data: {
+            "idEspecialidad" : idRegistro
+        },
+        success: function(data){
+            cargarTablaEspecialidades();
+            alert("Datos Eliminados");
+        }
+    });
+    
+}
+  
+
+
+
 
 
 //registrar pacientes
